@@ -51,5 +51,23 @@ class LottoTest {
     }
 
 
+    // 번호 하나하나 검증하는 함수는 private로 작성되어 검증 함수를 실제로 사용하는 confirmWinningNumbers로 테스트한다.
+    @Test
+    void 로또_번호_검증() {
+        Lotto lotto = new Lotto(List.of(1, 2, 3, 10, 11, 7));
+        List<Integer> winningNumbers = List.of(1, 2, 3, 4, 5, 6);
+        int bonusNumber = 7;
+
+        List<LottoNumberMatchType> matchResult = lotto.confirmWinningNumbers(winningNumbers, bonusNumber);
+        List<LottoNumberMatchType> correctMatchResult = List.of(LottoNumberMatchType.CORRECT,
+                LottoNumberMatchType.CORRECT,
+                LottoNumberMatchType.CORRECT,
+                LottoNumberMatchType.INCORRECT,
+                LottoNumberMatchType.INCORRECT,
+                LottoNumberMatchType.BONUS_NUMBER_CORRECT);
+
+        assertEquals(correctMatchResult, matchResult);
+    }
+
     // TODO: 추가 기능 구현에 따른 테스트 코드 작성
 }
