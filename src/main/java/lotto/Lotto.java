@@ -1,8 +1,9 @@
 package lotto;
 
-import java.util.Iterator;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
+
 
 public class Lotto {
     private final List<Integer> numbers;
@@ -26,6 +27,24 @@ public class Lotto {
         System.out.println("[" + winnerString + "]");
     }
 
+    public List<LottoNumberMatchType> confirmWinningNumbers(List<Integer> winningNumbers, int bonusNumber) {
+        List<LottoNumberMatchType> numberMatchResults = new ArrayList<>();
 
-    // TODO: 추가 기능 구현
+        numbers.forEach(number -> {
+            numberMatchResults.add(
+                    checkNumber(number, winningNumbers, bonusNumber)
+            );
+        });
+        return numberMatchResults;
+    }
+
+    private LottoNumberMatchType checkNumber(int myNumber, List<Integer> winningNumbers, int bonusNumber) {
+        if(myNumber == bonusNumber) {
+            return LottoNumberMatchType.BONUS_NUMBER_CORRECT;
+        }
+        else if(winningNumbers.contains(myNumber)) {
+            return LottoNumberMatchType.CORRECT;
+        }
+        return LottoNumberMatchType.INCORRECT;
+    }
 }
