@@ -17,6 +17,10 @@ public class Lotto {
         if (numbers.size() != 6) {
             throw new IllegalArgumentException("[ERROR] 로또 번호는 6개여야 합니다.");
         }
+        // 중복된 숫자 여부 확인
+        if(numbers.stream().distinct().toList().size() != 6) {
+            throw new IllegalArgumentException("[ERROR] 로또 번호는 중복될 수 없습니다.");
+        };
     }
 
     public void getLottoNumbers() {
